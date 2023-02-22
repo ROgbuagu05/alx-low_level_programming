@@ -1,7 +1,7 @@
 #include "main.h"
 /**
- * jack_bauer - prints every minute of the day starting from 00:00
- * Return: 0 (Successful)
+ * jack_bauer - prints 24hrs time
+ * Return: void
  */
 void jack_bauer(void)
 {
@@ -16,7 +16,7 @@ void jack_bauer(void)
 		{
 			_putchar(i + '0');
 			_putchar(':');
-			_putchar(j + '0');
+			_putchar(j > 9 ? (int)j + '0' : j + '0');
 			_putchar('\n');
 			j++;
 		}
