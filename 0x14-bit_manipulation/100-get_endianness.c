@@ -6,11 +6,8 @@
  */
 int get_endianness(void)
 {
-	int i = 1;
-	char *c = (char *)&i;
+	uint16_t num = 0x1;
+	uint8_t *byte = (uint8_t *)&num;
 
-	if (*c)
-		return (0);
-	else
-		return (1);
+	return ((byte[0] == 0x1) ? 1 : 0);
 }
