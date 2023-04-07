@@ -1,7 +1,7 @@
 #include "main.h"
 #include <stdlib.h>
 /**
- * read_textfile - reads the text file and prints t standard output
+ * read_textfile - reads the text file and prints the standard output
  * @filename: name of file to read
  * @letters: number of letters to read
  * Return: number of bytes to be read, or -1 on error
