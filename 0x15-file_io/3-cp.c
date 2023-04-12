@@ -4,6 +4,7 @@
 
 char *create_buffer(char *file);
 void close_file(int fd);
+
 /**
  * create_buffer - Allocates 1024 bytes for a buffer
  * @file: the file buffer name for storing chars
@@ -14,6 +15,8 @@ char *create_buffer(char *file)
 	char *buffer;
 
 	buffer = malloc(sizeof(char) * 1024);
+
+	if (buffer == NULL)
 	{
 		dprintf(STDERR_FILENO,
 				"Error: Can't write to %s\n", file);
