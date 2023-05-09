@@ -5,6 +5,26 @@
 #define BUFFER_SIZE 1024
 
 /**
+ * error_file - check if the files can be opened
+ * @file_from: name of file to copy from
+ * @file_to: name of file to copy to
+ * @argv: argument vector
+ * Return: Void
+ */
+void error_file(int file_from, int file_to, char *argv[])
+{
+	if (file_from == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		exit(98);
+	}
+	if (file_to == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		exit(99);
+	}
+}
+/**
  * main - copies the content of a file to another file
  * @argc: argument count
  * @argv: argument vector
