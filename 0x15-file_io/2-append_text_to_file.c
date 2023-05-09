@@ -11,16 +11,26 @@
  */
 int append_text_to_file(const char *filename, char *text_content)
 {
-	FILE *file = fopen(filename, "a");
+	FILE *fp = fopen(filename, "a");
+	int result = fputs(text_content, fp);
 
 	if (filename == NULL)
 	{
 		return (-1);
 	}
-	if (file == NULL)
+	if (fp == NULL)
 	{
-		fprintf(file, "%s", text_content);
+		return (-1);
 	}
-	fclose(file);
+	if (text_content == NULL)
+	{
+		fclose(fp);
+		return (1);
+	}
+	fclose(fp);
+	if (result == 0)
+	{
+		return (-1);
+	}
 	return (1);
 }
