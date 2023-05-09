@@ -8,7 +8,7 @@
  * main - copies the content of a file to another file
  * @argc: argument count
  * @argv: argument vector
- * Return: Always 0
+ * Return: 0 on success, or an error code on failure
  */
 int main(int argc, char *argv[])
 {
