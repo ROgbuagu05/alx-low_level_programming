@@ -26,7 +26,7 @@ void error_file(int file_from, int file_to, char *argv[])
 }
 
 /**
- * main - copies the content of a file to another file
+ * main - chceks the code
  * @argc: argument count
  * @argv: argument vector
  * Return: 0 on success, or an error code on failure
