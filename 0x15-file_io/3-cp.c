@@ -24,6 +24,7 @@ void error_file(int file_from, int file_to, char *argv[])
 		exit(99);
 	}
 }
+
 /**
  * main - copies the content of a file to another file
  * @argc: argument count
@@ -77,5 +78,5 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_to);
 		exit(100);
 	}
-	exit(0);
+	return (0);
 }
