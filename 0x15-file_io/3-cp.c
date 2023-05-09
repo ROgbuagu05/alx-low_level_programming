@@ -9,7 +9,7 @@
  * @file_from: name of file to copy from
  * @file_to: name of file to copy to
  * @argv: argument vector
- * Return: Void
+ * Return: no return
  */
 void error_file(int file_from, int file_to, char *argv[])
 {
