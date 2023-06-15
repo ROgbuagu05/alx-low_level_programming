@@ -3,16 +3,31 @@
 #include <string.h>
 /**
  * main - Generates and prints passwords for the crackme5 executable.
- * @argc: Argument count.
- * @argv: Argument vector.
+ * @argc: The number of arguments supplied to the program.
+ * @argv: An array of pointers to the arguments.
  * Return: Always 0.
  */
-int main(int  __attribute__((__unused__)) argc, char *argv[])
+int main(int __attribute__((__unused__)) argc, char *argv[])
 {
-	char password[7];
-	char *codex = "A-CHRDw87lNS0E9B2TibgpnMVys5XzvtOGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
-	int len = strlen(argv[1]);
-	int i, tmp;
+	char password[8], *codex;
+	int len, i, tmp;
+
+	if (argc < 2)
+	{
+		printf("Usage: %s <password>\n", argv[0]);
+		return (1);
+	}
+
+	len = strlen(argv[1]);
+	if (len == 0)
+	{
+		printf("Password cannot be empty.\n");
+		return (1);
+	}
+	codex = "A-CHRDw87lNS0E9B2TibgpnMVys5XzvtOGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
+
+	tmp = (len ^ 59) & 63;
+	password[0] = codex[tmp];
 
 	tmp = 0;
 	for (i = 0; i < len; i++)
@@ -24,11 +39,12 @@ int main(int  __attribute__((__unused__)) argc, char *argv[])
 		tmp *= argv[1][i];
 	password[2] = codex[(tmp ^ 85) & 63];
 
-	tmp = argv[1][0];
-	for (i = 1; i < len; i++)
+	tmp = 0;
+	for (i = 0; i < len; i++)
+	{
 		if (argv[1][i] > tmp)
 			tmp = argv[1][i];
-
+	}
 	srand(tmp ^ 14);
 	password[3] = codex[rand() & 63];
 
@@ -42,9 +58,6 @@ int main(int  __attribute__((__unused__)) argc, char *argv[])
 	password[5] = codex[(tmp ^ 229) & 63];
 
 	password[6] = '\0';
-
 	printf("%s\n", password);
-
 	return (0);
 }
-
