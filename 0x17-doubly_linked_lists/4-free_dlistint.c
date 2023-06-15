@@ -8,11 +8,11 @@
  */
 void free_dlistint(dlistint_t *head)
 {
-	dlistint_t *current = NULL;
 	while (head != NULL)
 	{
-		current = head->next;
+		dlistint_t *next = head->next;
+
 		free(head);
-		head = current;
+		head = next;
 	}
 }
