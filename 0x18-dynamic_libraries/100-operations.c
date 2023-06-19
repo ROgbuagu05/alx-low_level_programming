@@ -7,23 +7,17 @@ int sub(int a, int b)
 {
 	return (a - b);
 }
+
+int mod(int a, int b)
+{
+	return (a % b);
+}
+
 int mul(int a, int b)
 {
 	return (a * b);
 }
 int div(int a, int b)
 {
-	return (a / b);
-}
-int factorial(int n)
-{
-
-	if (n == 0)
-	{
-		return (-1);
-	}
-	else
-	{
-		return (n * factorial(n - 1));
-	}
+	return ((double)a / b);
 }
