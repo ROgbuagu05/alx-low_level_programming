@@ -3,40 +3,6 @@
 #include "search_algos.h"
 
 /**
- * _binary_search - Performs a binary search in the sorted array.
- * @array: Pointer to the first element of the array to search in.
- * @left: Starting index of the [sub]array to search.
- * @right: Ending index of the [sub]array to search.
- * @value: The value to search for.
- * Return: If the value is not present or the array is NULL
- */
-int _binary_search(int *array, size_t left, size_t right, int value)
-{
-	size_t i;
-
-	if (array == NULL)
-		return (-1);
-
-	while (right >= left)
-	{
-		printf("Searching in array: ");
-		for (i = left; i < right; i++)
-			printf("%d, ", array[i]);
-		printf("%d\n", array[i]);
-
-		i = left + (right - left) / 2;
-		if (array[i] == value)
-			return (i);
-		if (array[i] > value)
-			right = i - 1;
-		else
-			left = i + 1;
-	}
-
-	return (-1);
-} 
-
-/**
  * exponential_search - Searches for a value in a sorted array
  * of integers using the Exponential search algorithm.
  * @array: Pointer to the first element of the array to search in.
@@ -46,18 +12,39 @@ int _binary_search(int *array, size_t left, size_t right, int value)
  */
 int exponential_search(int *array, size_t size, int value)
 {
-	size_t i = 0, right;
+	size_t i = 0, end = 0, index = 0, pivot = 0;
+	size_t exp = 1;
 
-	if (array == NULL)
+	if (size == 0 || !array)
 		return (-1);
-
-	if (array[0] != value)
+	while (array[exp] < value && exp < size)
 	{
-		for (i = 1; i < size && array[i] <= value; i = i * 2)
-			printf("Value checked array[%ld] = [%d]\n", i, array[i]);
+		printf("Value checked array[%ld] = [%d]\n", exp, array[exp]);
+		exp *= 2;
 	}
-
-	right = i < size ? i : size - 1;
-	printf("Value found between indexes [%ld] and [%ld]\n", i / 2, right);
-	return (_binary_search(array, i / 2, right, value));
+	index = exp / 2;
+	if (exp >= size)
+		end = size - 1;
+	else
+		end = exp;
+	printf("Value found between indexes [%lu] and [%lu]\n", index, end);
+	while (end >= index)
+	{
+		printf("Searching in array: ");
+		for (i = index; i <= end; i++)
+		{
+			if (i != index)
+				printf(", ");
+			printf("%d", array[i]);
+		}
+		printf("\n");
+		pivot = (end + index) / 2;
+		if (value == array[pivot])
+			return (pivot);
+		else if (value < array[pivot])
+			end = pivot - 1;
+		else
+			index = pivot + 1;
+	}
+	return (-1);
 }
