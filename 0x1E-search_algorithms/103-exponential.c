@@ -3,6 +3,41 @@
 #include "search_algos.h"
 
 /**
+ * _binary_search - Searches for a value in a sorted array
+ * @array: Pointer to the first element of the array to search.
+ * @left: Starting index of the [sub]array to search.
+ * @right: Ending index of the [sub]array to search.
+ * @value: Value to search for.
+ * Return: If the value is not present or the array is NULL, -1.
+ * Otherwise, the index where the value is located.
+ */
+int _binary_search(int *array, size_t left, size_t right, int value)
+{
+	size_t j;
+
+	if (array == NULL)
+		return (-1);
+
+	while (right >= left)
+	{
+		printf("Searching in array: ");
+		for (j = left; j < right; j++)
+			printf("%d, ", array[j]);
+		printf("%d\n", array[j]);
+
+		j = left + (right - left) / 2;
+		if (array[j] == value)
+			return (j);
+		if (array[j] > value)
+			right = j - 1;
+		else
+			left = j + 1;
+	}
+
+	return (-1);
+}
+
+/**
  * exponential_search - Searches for a value in a sorted array
  * of integers using the Exponential search algorithm.
  * @array: Pointer to the first element of the array to search in.
@@ -12,39 +47,18 @@
  */
 int exponential_search(int *array, size_t size, int value)
 {
-	size_t i = 0, end = 0, index = 0, pivot = 0;
-	size_t exp = 1;
+	size_t j = 0, right;
 
-	if (size == 0 || !array)
+	if (array == NULL)
 		return (-1);
-	while (array[exp] < value && exp < size)
+
+	if (array[0] != value)
 	{
-		printf("Value checked array[%ld] = [%d]\n", exp, array[exp]);
-		exp *= 2;
+		for (j = 1; j < size && array[j] <= value; j = i * 2)
+			printf("Value checked array[%ld] = [%d]\n", j, array[j]);
 	}
-	index = exp / 2;
-	if (exp >= size)
-		end = size - 1;
-	else
-		end = exp;
-	printf("Value found between indexes [%lu] and [%lu]\n", index, end);
-	while (end >= index)
-	{
-		printf("Searching in array: ");
-		for (i = index; i <= end; i++)
-		{
-			if (i != index)
-				printf(", ");
-			printf("%d", array[i]);
-		}
-		printf("\n");
-		pivot = (end + index) / 2;
-		if (value == array[pivot])
-			return (pivot);
-		else if (value < array[pivot])
-			end = pivot - 1;
-		else
-			index = pivot + 1;
-	}
-	return (-1);
+
+	right = j < size ? j : size - 1;
+	printf("Value found between indexes [%ld] and [%ld]\n", j / 2, right);
+	return (_binary_search(array, j / 2, right, value));
 }
